@@ -1,5 +1,4 @@
-# IP-Project
-# Smart LawnMower
+# IP-Project - Smart LawnMower
 
 ## Report
 
