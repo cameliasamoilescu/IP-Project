@@ -41,12 +41,13 @@ Build tested on Ubuntu 20.04.
   - matrice: defines the matrix representation of the yard:
 
     Example of yard matrix:
-            
+    ```    
     00000
     01120
     01100    where 0 = grass zone, 1 = house zone, 2 = charging station
     00000 
     00000
+    ```
 
 - Initialize the current battery level (0-100%).
 - Build the road that the lawnmower will take to cut the grass.
