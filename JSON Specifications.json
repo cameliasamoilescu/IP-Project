@@ -1,0 +1,139 @@
+{
+    "device-name": "Smart Lawnmower",
+    "device-type": "Lawnmower",
+    "buffers-count": 1,
+    "input-buffers":{
+        "1":{
+            "token-delimitators": ";",
+            "protocol": "HTTP",
+            "prefix": "curl -XPOST 'http://127.0.0.1:9080/setting/:settingName'",
+            "buffer-tokens":[
+            {
+                "name":"latime",
+                "description":"Set the width of the yard",
+                "token-type":"int", 
+                "byte-size":2, 
+                "regex-rule": "^[1-4]$|^[1-9][0-9]$|^[1-9][0-9][0-9]$|(500)$]", //  Correct inputs will be any number between 1 and 500
+                "optional": false
+            },
+            {
+                "name":"lungime",
+                "description": "Set the length of the yard",
+                "token-type":"int",
+                "byte-size":10,
+                "regex-rule": "^[1-4]$|^[1-9][0-9]$|^[1-9][0-9][0-9]$|(500)$", // Correct inputs will be any number between 1 and 500
+                "optional": false
+            },
+            {
+                "name":"matrice",
+                "description": "Sets the yard configuration",
+                "token-type":"string",
+                "byte-size":10,
+                "regex-rule": "[0|1|2]", // Correct inputs will be any number between 1 and 7, default 1 if the number is not in range 
+                "optional": false
+            }
+            ]
+        },
+		"2":{
+            "token-delimitators": ";",
+            "protocol": "HTTP",
+            "prefix": "curl -XPOST 'http://127.0.0.1:9080/goToCharge'",
+            "buffer-tokens":[
+            ]
+		},
+        "3":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -XPOST 'http://127.0.0.1:9080/:stateName'",
+            "buffer-tokens":[
+            {
+                "name":"state",
+                "description":"State of the LawnMower",
+                "token-type":"string", 
+                "byte-size":10, 
+                "regex-rule": "start|stop|resume", //  Correct inputs will be any [start, stop, resume]
+                "optional": false
+            }
+            ]
+        },
+        "4":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -XPOST 'http://127.0.0.1:9080/init/:value'",
+            "buffer-tokens":[
+            {
+                "name":"batteryInit",
+                "description":"Initialize the level of the battery",
+                "token-type":"int", 
+                "byte-size":10, 
+                "regex-rule": "/0|^[1-9]$|^[1-9][0-9]$|^(100)$/g", //  Correct inputs will be any number between 1 and 100
+                "optional": false
+            }
+            ]
+        }    
+    },
+    "output-buffers":{
+        "1":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -XGET 'http://127.0.0.1:9080/setting/:settingName'",
+            "buffer-tokens":[
+                {
+                    "name":"lungime",
+                    "description": "Get the length of the yard",
+                    "token-type":"int", 
+                    "byte-size":10, 
+                    "regex-rule": "^[1-4]$|^[1-9][0-9]$|^[1-9][0-9][0-9]$|(500)$", // Correct output will be: any number saved. 
+                    "optional": false
+                },
+				{
+                    "name":"latime",
+                    "description": "Get the width of the yard",
+                    "token-type":"int", 
+                    "byte-size":10, 
+                    "regex-rule": "^[1-4]$|^[1-9][0-9]$|^[1-9][0-9][0-9]$|(500)$", // Correct output will be: any number saved. 
+                    "optional": false
+                },
+				{
+                    "name":"matrice",
+                    "description": "Get the yard configuration",
+                    "token-type":"int", 
+                    "byte-size":10, 
+                    "regex-rule": "[0,1]{5,125000}2{1}[0,1]{5,125000}", // Correct output will be: any number saved. 
+                    "optional": false
+                }
+            ]
+        },
+		"2":{
+            "token-delimitators": "",
+            "protocol": "HTTP",
+            "prefix": "curl -XGET 'http://127.0.0.1:9080/'",
+            "buffer-tokens":[
+                {
+                    "name":"baterie",
+                    "description": "Get the batery level of the machine",
+                    "token-type":"int", 
+                    "byte-size":10, 
+                    "regex-rule": "[1-9]|[1-9][0-9]|100", // Correct output will be: any number saved. 
+                    "optional": false
+                },
+				{
+                    "name":"state",
+                    "description": "Get the state of the machine",
+                    "token-type":"string", 
+                    "byte-size":10, 
+                    "regex-rule": "[a-z]*", // Correct output will be: stopped, started
+                    "optional": false
+                },
+				{
+                    "name":"buildRoad",
+                    "description": "Get the time(in seconds) required until the finish ",
+                    "token-type":"int", 
+                    "byte-size":10, 
+                    "regex-rule": "[1-9]{1}[0-9]{1,50000000}", // Correct output will be: time. 
+                    "optional": false
+                }
+            ]
+        }
+    }
+}
