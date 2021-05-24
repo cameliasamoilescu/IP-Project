@@ -50,8 +50,8 @@ Build tested on Ubuntu 20.04.
     ```
 
 - Initialize the current battery level (0-100%).
-- Build the road that the lawnmower will take to cut the grass.
-- Read the informations defined above.
+- Determine the road that the lawnmower will take to cut the grass.
+- Read the information defined above.
 - Tell the lawnmower to go to the charging station. After this operation, the battery will be charged to 100%.
 - Define the state of the device:
   - Start => Starts the mowing process (checks if the battery level is enough to do this operation)
