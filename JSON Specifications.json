@@ -4,7 +4,7 @@
     "buffers-count": 1,
     "input-buffers":{
         "1":{
-            "token-delimitators": ";",
+            "token-delimitators": "",
             "protocol": "HTTP",
             "prefix": "curl -XPOST 'http://127.0.0.1:9080/setting/:settingName'",
             "buffer-tokens":[
@@ -35,7 +35,7 @@
             ]
         },
 		"2":{
-            "token-delimitators": ";",
+            "token-delimitators": "",
             "protocol": "HTTP",
             "prefix": "curl -XPOST 'http://127.0.0.1:9080/goToCharge'",
             "buffer-tokens":[
